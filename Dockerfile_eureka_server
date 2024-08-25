@@ -1,0 +1,7 @@
+FROM openjdk
+ARG JAR_FILE=build/libs/eureka-server-1.0.0.jar
+WORKDIR /opt/app
+COPY ${JAR_FILE} app.jar
+COPY --from=ghcr.io/ufoscout/docker-compose-wait:latest /wait /wait
+EXPOSE 8082
+CMD /wait && java -jar app.jar
